@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# paramètres
+INPUTDIR="PATH_IMAGES"
+cd $INPUTDIR
+
+# Optimisation des fichier jpg
+FILES=$(find -iname '*.jpg' -o -iname '*.jpeg')
+for FILENAME in $FILES; do
+  echo "jpegtran -copy none -optimize -progressive $FILENAME $FILENAME"
+  jpegtran -copy none -optimize -progressive -outfile $FILENAME $FILENAME
+done
+
+# Optimisation des fichier png
+FILES=$(find -iname '*.png')
+for FILENAME in $FILES; do
+  echo "optipng -o7 $FILENAME"
+  optipng -o7 $FILENAME
+done
